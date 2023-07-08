@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'tavlia_backend_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tavlia_backend_database',
+        'NAME': 'tavlia',
     }
 }
 
