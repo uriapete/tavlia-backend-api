@@ -82,7 +82,7 @@ DATABASES = {
 }
 
 # Our new, custom User Model
-AUTH_USER_MODEL="user_accounts.UserAccount"
+AUTH_USER_MODEL="user_accounts.CustomUser"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
