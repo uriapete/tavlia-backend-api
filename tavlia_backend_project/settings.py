@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'user_accounts',
 ]
 
@@ -131,6 +132,5 @@ REST_FRAMEWORK={
     'PAGE_SIZE':10,
     'DEFAULT_AUTHENTICATION_CLASSES':[
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authtoken',
     ]
 }
