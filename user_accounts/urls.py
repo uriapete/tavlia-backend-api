@@ -1,7 +1,7 @@
-from django.urls import path
+from django.urls import path,include
 
 from user_accounts.models import CustomUser
-from . import views,include
+from . import views
 from rest_framework import routers,serializers,viewsets
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
