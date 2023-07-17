@@ -1,17 +1,7 @@
 from django.urls import path,include
-
-from user_accounts.models import CustomUser
 from . import views
-from rest_framework import routers,serializers,viewsets
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model=CustomUser
-        fields=['url','username']
-        
-class UserViewSet(viewsets.ModelViewSet):
-    queryset=CustomUser.objects.all()
-    serializer_class=UserSerializer
+from rest_framework import routers
+from .views import UserViewSet
     
 router=routers.DefaultRouter()
 router.register(r'users',UserViewSet)
