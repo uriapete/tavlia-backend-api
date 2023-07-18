@@ -20,7 +20,7 @@ class SaveFileViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         user=self.request.user
-        return SaveFile.objects.filter(user=user).order_by("last_updated")
+        return SaveFile.objects.filter(user=user).order_by("last_updated").reverse()
     
     def create(self, req:HttpRequest):
         reqbod=json.loads(req.body)
