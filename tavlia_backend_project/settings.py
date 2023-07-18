@@ -15,6 +15,7 @@ import os
 import environ
 environ.Env
 environ.Env.read_env()
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,14 +45,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders',
     'user_accounts',
     'save_files',
 ]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -81,6 +81,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'tavlia_backend_project.wsgi.application'
 
 CORS_ALLOWED_ORIGINS=os.environ.get("ALLOWED_URLS").split(",")
+for origin in CORS_ALLOWED_ORIGINS:
+    print(origin)
+
+CORS_ALLOW_HEADERS=(
+    *default_headers,
+    "token",
+)
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
