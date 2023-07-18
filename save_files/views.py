@@ -1,6 +1,6 @@
 import json
-from django.shortcuts import render
-from django.http import HttpRequest,HttpResponse,HttpResponseRedirect,JsonResponse
+from django.shortcuts import redirect, render
+from django.http import HttpRequest,HttpResponse,HttpResponseRedirect,JsonResponse,HttpResponseBadRequest
 # from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets,permissions
 from .permissions import IsObjUser
@@ -16,7 +16,7 @@ class SaveFileViewSet(viewsets.ModelViewSet):
     queryset=SaveFile.objects.all().order_by("last_updated")
     serializer_class=SaveFileSerializer
     authentication_classes=[TokenAuthentication]
-    permission_classes=[IsObjUser]
+    permission_classes=[permissions.IsAuthenticated,IsObjUser]
     
     def get_queryset(self):
         user=self.request.user
@@ -30,4 +30,15 @@ class SaveFileViewSet(viewsets.ModelViewSet):
         if(serializerdata.is_valid()):
             new_save:SaveFile=serializerdata.save()
             return HttpResponseRedirect(redirect_to=f"{new_save.pk}/")
+        
+    def update(self, request:HttpRequest, *args, **kwargs):
+        reqbod=json.loads(request.body)
+        data=dict(reqbod)
+        data["user"]=request.user.pk
+        item=self.get_object()
+        serializerdata=SaveFileSerializer(item,data=data,partial=True)
+        if(serializerdata.is_valid()):
+            updated_save:SaveFile=serializerdata.save()
+            return HttpResponseRedirect(redirect_to=f"/save_files/{updated_save.pk}/")
+        return HttpResponseRedirect(redirect_to="")
             
