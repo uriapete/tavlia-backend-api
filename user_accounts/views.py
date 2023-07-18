@@ -13,7 +13,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class=UserSerializer
     
 class UserInfoFromToken(APIView):
-    def post(self,request:HttpRequest):
+    def get(self,request:HttpRequest):
         tokenKey=request.headers["token"]
         
         tokenUser=Token.objects.get(key=tokenKey).user.username
