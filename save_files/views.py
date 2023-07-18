@@ -18,6 +18,10 @@ class SaveFileViewSet(viewsets.ModelViewSet):
     authentication_classes=[TokenAuthentication]
     permission_classes=[IsObjUser]
     
+    def get_queryset(self):
+        user=self.request.user
+        return SaveFile.objects.filter(user=user).order_by("last_updated")
+    
     def create(self, req:HttpRequest):
         reqbod=json.loads(req.body)
         data=dict(reqbod)
