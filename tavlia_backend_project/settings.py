@@ -81,8 +81,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'tavlia_backend_project.wsgi.application'
 
 CORS_ALLOWED_ORIGINS=os.environ.get("ALLOWED_URLS").split(",")
-for origin in CORS_ALLOWED_ORIGINS:
-    print(origin)
 
 CORS_ALLOW_HEADERS=(
     *default_headers,
