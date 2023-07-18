@@ -28,5 +28,6 @@ urlpatterns = [
     path('token-auth/',views.obtain_auth_token),
     path('',include('rest_framework.urls')),
     path('',include(router.urls)),
-    path('',include('user_accounts.urls'))
+    path('',include('user_accounts.urls')),
+    path('',include('save_files.urls')),
 ]
