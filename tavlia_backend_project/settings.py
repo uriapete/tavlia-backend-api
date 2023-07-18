@@ -86,7 +86,7 @@ for origin in CORS_ALLOWED_ORIGINS:
 
 CORS_ALLOW_HEADERS=(
     *default_headers,
-    "token",
+    "Authorization",
 )
 
 # Database
