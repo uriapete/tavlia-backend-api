@@ -14,10 +14,7 @@ class UserViewSet(viewsets.ModelViewSet):
     
 class UserInfoFromToken(APIView):
     def get(self,request:HttpRequest):
-        tokenKey=request.headers["token"]
-        
-        tokenUser=Token.objects.get(key=tokenKey).user.username
-        print((tokenUser))
-        return JsonResponse({
-            "user":tokenUser
-        })
+        data={}
+        if request.user.is_authenticated:
+            data["user"]=request.user.username
+        return JsonResponse(data)
