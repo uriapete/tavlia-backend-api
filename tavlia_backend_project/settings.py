@@ -99,7 +99,7 @@ database={}
 if DEBUG:
     database={
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crystallia',
+        'NAME': 'tavlia',
     }
 else:
     database=dj_database_url.config(
