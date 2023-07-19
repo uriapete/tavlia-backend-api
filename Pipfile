@@ -9,6 +9,17 @@ psycopg2 = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 django-environ = "*"
+dj-database-url = "*"
+asgiref = "*"
+whitenoise = "*"
+brotli = "*"
+certifi = "*"
+distlib = "*"
+filelock = "*"
+gunicorn = "*"
+platformdirs = "*"
+python-dotenv = "*"
+sqlparse = "*"
 
 [dev-packages]
 
