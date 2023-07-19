@@ -29,7 +29,8 @@ class SaveFileViewSet(viewsets.ModelViewSet):
         serializerdata=SaveFileSerializer(data=data)
         if(serializerdata.is_valid()):
             new_save:SaveFile=serializerdata.save()
-            return HttpResponseRedirect(redirect_to=f"{new_save.pk}/")
+            serializer=self.get_serializer(SaveFile.objects.get(pk=new_save.pk))
+            return Response(serializer.data)
         
     def update(self, request:HttpRequest, *args, **kwargs):
         reqbod=json.loads(request.body)
@@ -38,7 +39,8 @@ class SaveFileViewSet(viewsets.ModelViewSet):
         item=self.get_object()
         serializerdata=SaveFileSerializer(item,data=data,partial=True)
         if(serializerdata.is_valid()):
-            updated_save:SaveFile=serializerdata.save()
-            return HttpResponseRedirect(redirect_to=f"/save_files/{updated_save.pk}/")
+            serializerdata.save()
+            serializer=self.get_serializer(item)
+            return Response(serializer.data)
         return HttpResponseRedirect(redirect_to="")
             
